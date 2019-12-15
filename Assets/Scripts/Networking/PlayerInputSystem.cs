@@ -10,7 +10,7 @@ public class PlayerInputSystem : ComponentSystem {
 
     protected override void OnCreate() {
         RequireSingletonForUpdate<NetworkIdComponent>();
-        RequireSingletonForUpdate<EnableCellsGhostReceiveSystemComponent>();
+        //RequireSingletonForUpdate<EnableCellsGhostReceiveSystemComponent>();
     }
 
     protected override void OnUpdate() {

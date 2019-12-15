@@ -81,16 +81,16 @@ public class GoInGameServerSystem : ComponentSystem {
         Entities.WithNone<SendRpcCommandRequestComponent>().ForEach((Entity reqEnt, ref GoInGameRequest req, ref ReceiveRpcCommandRequestComponent reqSrc) => {
             PostUpdateCommands.AddComponent<NetworkStreamInGame>(reqSrc.SourceConnection);
             UnityEngine.Debug.Log(string.Format("Server setting connection {0} to in game", EntityManager.GetComponentData<NetworkIdComponent>(reqSrc.SourceConnection).Value));
-            var ghostCollection = GetSingleton<GhostPrefabCollectionComponent>();
-            var ghostId = CellsGhostSerializerCollection.FindGhostType<NetPlayerParticleSnapshotData>();
-            var prefab = EntityManager.GetBuffer<GhostPrefabBuffer>(ghostCollection.serverPrefabs)[ghostId].Value;
-            var player = EntityManager.Instantiate(prefab);
+            //var ghostCollection = GetSingleton<GhostPrefabCollectionComponent>();
+            //var ghostId = CellsGhostSerializerCollection.FindGhostType<NetPlayerParticleSnapshotData>();
+            //var prefab = EntityManager.GetBuffer<GhostPrefabBuffer>(ghostCollection.serverPrefabs)[ghostId].Value;
+            //var player = EntityManager.Instantiate(prefab);
 
-            EntityManager.AddComponent<Primer>(player);
-            EntityManager.SetComponentData(player, new NetworkPlayer { PlayerId = EntityManager.GetComponentData<NetworkIdComponent>(reqSrc.SourceConnection).Value });
-            PostUpdateCommands.AddBuffer<PlayerInput>(player);
+            //EntityManager.AddComponent<Primer>(player);
+            //EntityManager.SetComponentData(player, new NetworkPlayer { PlayerId = EntityManager.GetComponentData<NetworkIdComponent>(reqSrc.SourceConnection).Value });
+            //PostUpdateCommands.AddBuffer<PlayerInput>(player);
 
-            PostUpdateCommands.SetComponent(reqSrc.SourceConnection, new CommandTargetComponent { targetEntity = player });
+            //PostUpdateCommands.SetComponent(reqSrc.SourceConnection, new CommandTargetComponent { targetEntity = player });
 
             PostUpdateCommands.DestroyEntity(reqEnt);
         });
